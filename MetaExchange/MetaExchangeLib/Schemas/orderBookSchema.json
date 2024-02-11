@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "AcqTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Bids": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Order": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "null"
+              },
+              "Time": {
+                "type": "string",
+              },
+              "Type": {
+                "type": "string",
+                "enum": ["Buy"]
+              },
+              "Kind": {
+                "type": "string",
+                "enum": ["Limit"]
+              },
+              "Amount": {
+                "type": "number"
+              },
+              "Price": {
+                "type": "number"
+              }
+            },
+            "required": ["Id", "Time", "Type", "Kind", "Amount", "Price"]
+          }
+        },
+        "required": ["Order"]
+      }
+    },
+    "Asks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Order": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "null"
+              },
+              "Time": {
+                "type": "string",
+              },
+              "Type": {
+                "type": "string",
+                "enum": ["Sell"]
+              },
+              "Kind": {
+                "type": "string",
+                "enum": ["Limit"]
+              },
+              "Amount": {
+                "type": "number"
+              },
+              "Price": {
+                "type": "number"
+              }
+            },
+            "required": ["Id", "Time", "Type", "Kind", "Amount", "Price"]
+          }
+        },
+        "required": ["Order"]
+      }
+    }
+  },
+  "required": ["AcqTime", "Bids", "Asks"]
+}
