@@ -3,9 +3,9 @@ using System.Text.Json;
 
 namespace MetaExchangeLib
 {
-    public static class Loader
+    public static class Reader
     {
-        public static List<OrderBook> LoadOrderBooks(string orderBooksFilePath)
+        public static List<OrderBook> ReadOrderBooks(string orderBooksFilePath, double eurBalance = 50000.0, double btcBalance = 5.0)
         {
             List<OrderBook> orderBooks = new List<OrderBook>();
 
@@ -38,8 +38,15 @@ namespace MetaExchangeLib
                         }
 
                         OrderBook? orderBook = JsonSerializer.Deserialize<OrderBook>(jsonData);
+
                         if (orderBook != null)
                         {
+                            // set some balance on order book
+                            orderBook.balanceEUR = eurBalance;
+                            orderBook.availableBalanceEUR = eurBalance;
+                            orderBook.balanceBTC = btcBalance;
+                            orderBook.availableBalanceBTC = btcBalance;
+
                             // add order book id to the dataset - line ID in incoming data
                             orderBook.Id = i;
                             foreach (OrderBookItem item in orderBook.Asks)

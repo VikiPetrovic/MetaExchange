@@ -13,13 +13,7 @@
         public double availableBalanceBTC { get; set; }
 
         public OrderBook()
-        {
-            //generate some random balanca for this exchange - missing in input data
-            balanceEUR = 50000; // GenerateEurBalance();
-            balanceBTC = 10;    // GenerateBtcBalance();
-            // available balance - decreaseing while searching for result
-            availableBalanceBTC = balanceBTC;   
-            availableBalanceEUR = balanceEUR;
+        {            
             Bids = new List<OrderBookItem>();
             Asks = new List<OrderBookItem>();
         }
@@ -38,7 +32,7 @@
 
         public override string ToString()
         {
-            string s = $"\tID: {Id} AcqTime: {AcqTime} EUR Balance: {balanceEUR} BTC Balance: {balanceBTC}\n";
+            string s = $"\tID: {Id} AcqTime: {AcqTime} EUR Balance: {balanceEUR} € BTC Balance: {balanceBTC} BTC \n";
 
             s += "\tBids:\n";
             foreach (var bid in Bids)

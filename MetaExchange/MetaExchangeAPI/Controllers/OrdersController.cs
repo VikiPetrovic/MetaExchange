@@ -35,11 +35,12 @@ namespace MetaExchangeAPI.Controllers
 
             try
             {
-                string orderBooksFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/order_books_data");
-                List<OrderBook> orderBooks = Loader.LoadOrderBooks(orderBooksFile);
-                MetaExchange metaExchange = new MetaExchange();      // exchange is created and order books are loaded and format validated
-                                                                     // 
                 RequestOrder requestOrder = new RequestOrder(UserId: userId, Type: orderType, Amount: btcAmount);      // example: user wants to sell btAmount BTC
+
+                string orderBooksFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/order_books_data");
+                List<OrderBook> orderBooks = Reader.ReadOrderBooks(orderBooksFile);
+
+                MetaExchange metaExchange = new MetaExchange();                                                                     
                 List<Order> results = metaExchange.ProcessRequest(orderBooks, requestOrder);        // the request is processed - a optimal set of order is returned from the order books in the input data set for this request
                                 
                 return Ok(results.OrderBy(order => order.OrderBookId).ToList());
